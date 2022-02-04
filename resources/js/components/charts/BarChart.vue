@@ -2,18 +2,18 @@
   import { Bar } from 'vue-chartjs'
   export default {
     extends: Bar,
-    props: ["data", "options"],
+    props: ["data"],
     
     data(){
       return{
-        BarOptions: {
+        options: {
           legend: {
             display: true
           },
           responsive: true,
           maintainAspectRatio: false,
           title: {
-                display: true,
+                display: false,
                 text: 'Custom Chart Title'
             }
         },

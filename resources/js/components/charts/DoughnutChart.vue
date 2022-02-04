@@ -2,11 +2,11 @@
 import { Doughnut } from "vue-chartjs";
 export default {
     extends: Doughnut,
-    props: ["data", "options"],
+    props: ["data"],
 
     data() {
         return {
-            DoughnutOptions: {
+            options: {
                 legend: {
                     display: true,
                 },
@@ -14,7 +14,7 @@ export default {
                 maintainAspectRatio: false,
                 plugins: {
                     title: {
-                        display: true,
+                        display: false,
                         text: "Custom Chart Title",
                     },
                 },

@@ -283,7 +283,6 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Loading...</h5>
-                        
                     </div>
                 </div>
             </div>
@@ -301,6 +300,30 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">Performance [{{ map_name }}]</p>
+                        <div class="dropdown">
+                            <span
+                                class="badge badge-primary dropdown-toggle"
+                                data-mdb-toggle="dropdown"
+                                style="cursor: pointer"
+                            >
+                                {{ map_name }}
+                            </span>
+                            <ul
+                                class="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton"
+                            >
+                                <div v-for="x in map_badge" :key="x">
+                                    <li>
+                                        <a
+                                            @click="getMap(x)"
+                                            class="dropdown-item"
+                                            style="cursor: pointer"
+                                            >{{ x }}</a
+                                        >
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
                         <!-- <div v-for="x in map_badge" :key="x">
                             <span
                                 @click="getMap(x)"
@@ -314,7 +337,10 @@
                 </div>
             </div>
 
-            <div v-if="MapCompareData.datasets[0].data.length > 0" class="col-md-4">
+            <div
+                v-if="MapCompareData.datasets[0].data.length > 0"
+                class="col-md-4"
+            >
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">Over All Maps</p>
@@ -378,6 +404,7 @@ export default {
                             "#F78DA7",
                             "#9900EF",
                         ],
+                        hoverBorderWidth: 10,
                     },
                 ],
             },
@@ -400,7 +427,9 @@ export default {
                     {
                         label: "Kills",
                         data: [],
-                        backgroundColor: "#f87979",
+                        backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        borderColor: "rgb(255, 99, 132)",
+                        borderWidth: 1,
                     },
                 ],
             },
@@ -439,6 +468,8 @@ export default {
                         continue;
                     this.MapsData.datasets[0].data.push(maps[0][key]);
                 }
+                // console.log('map', this.MapsData);
+                this.MapsData = _.cloneDeep(this.MapsData);
             }
         },
         convert_steam64(x) {
