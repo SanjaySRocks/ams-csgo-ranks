@@ -22,8 +22,15 @@
                                 class="elevation-1"
                                 :search="search"
                             >
-                            <template v-slot:[`item.name`]="{ item }">
+                            <!-- <template v-slot:[`item.name`]="{ item }">
                                     <router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}">{{ item.name }}</router-link>
+                            </template> -->
+                            <template v-slot:item="{ item }">
+                                    <tr>
+                                    <td><router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}"> {{ item.name }} </router-link> </td> 
+                                    <td>{{item.steam }} </td>
+                                    <td>{{ item.value }} </td>
+                                </tr>
                             </template>
 
                             </v-data-table>
@@ -50,6 +57,10 @@
       }
     },
     methods:{
+        playerItem(item){
+            console.log(item);
+        },
+
             getTable(){
             axios.get('/api/points')
                 .then((response)=>{

@@ -12,12 +12,7 @@ class LevelRanksWeapons extends Model
 
     protected $table = "lvl_base_weapons";
 
-    // public function weapons()
-    // {
-    //     return $this->hasMany(LevelRanks::class, 'steam', 'steam');
-    // }
-
-    // public function steam(){
-    //     return $this->belongsTo(LevelRanks::class, 'steam', 'steam');
-    // }
+    public function user(){
+        return $this->belongsTo(LevelRanks::class, 'steam', 'steam');
+    }
 }

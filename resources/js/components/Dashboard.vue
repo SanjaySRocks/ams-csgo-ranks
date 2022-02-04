@@ -10,7 +10,7 @@
                                 id="typeText"
                                 v-model="search"
                                 class="form-control"
-                                placeholder="STEAM_1:23232424"
+                                placeholder="STEAM_1:0:123456789"
                             />
                         <button @click="searchbox()" class="btn btn-block btn-primary my-3">Search</button>
                     </div>

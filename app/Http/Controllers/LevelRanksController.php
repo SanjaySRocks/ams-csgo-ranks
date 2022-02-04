@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LevelRanks;
+use App\Models\LevelRanksWeapons;
 use DB;
 use DataTables;
 
@@ -61,10 +62,10 @@ class LevelRanksController extends Controller
     }
 
     public function getUser($id){
-        $user = LevelRanks::where('steam', $id)->first();
+        $user = LevelRanks::with(['base_hits','weapons','maps','unusual'])->where('steam', $id)->first();
 
-        $user['weapons'] = DB::table('lvl_base_weapons')->where('steam', $id)->orderBy('classname')->get();
-
+        return $user;
+        
         // dd($points);
         if(!$user)
             return response()->json(['error' => 'Not Found'], 404); 

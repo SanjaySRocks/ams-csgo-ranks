@@ -16,3 +16,45 @@
 body {
   background-color: #191919;
 }
+
+#app {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.align-right {
+  text-align: right;
+}
+
+#global-count {
+  font-family: "Montserrat", sans-serif;
+}
+#global-count div.card-body {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+#global-count h5.card-title {
+  margin-bottom: 0%;
+  color: #771b86;
+}
+
+.count {
+  font-weight: 600;
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+  color: #ba68c8;
+}
+
+.count_percent {
+  font-size: 16px;
+  color: grey;
+}
+
+#skillgroup {
+  height: 32px;
+}
+
+.user-name {
+  color: #555555;
+}
