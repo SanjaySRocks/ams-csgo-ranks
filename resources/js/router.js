@@ -7,6 +7,7 @@ import Deaths from "./components/Deaths.vue";
 import Headshots from "./components/Headshots.vue";
 import Knifes from "./components/Knifes.vue";
 import Player from "./components/Player.vue";
+import PageNotFound from "./components/PageNotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,10 @@ const routes = [
         component: Player,
         //props: true,
     },
+    {
+        path :'*',
+        component: PageNotFound
+    }
 ];
 
 const router = new VueRouter({
