@@ -77,7 +77,7 @@ export default {
                 { "data": "name", 
                     "className": 'font-weight-bold', 
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html('<router-link class="text-primary" :to="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</router-link>');
+                        $(nTd).html('<a class="text-primary" href="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</a>');
                     }
 
                 },

@@ -257,26 +257,29 @@
                 </div>
             </div>
 
+
             <div v-if="user.weapons.length > 0" class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Weapon Statistics</h5>
-                        <template>
-                            <v-data-table
-                                dense
-                                :headers="headers"
-                                :items="weapons"
-                                :items-per-page="5"
-                                class="elevation-1"
-                            >
-                                <template v-slot:[`item.classname`]="{ item }">
-                                    {{ item.classname }}
-                                </template>
-                            </v-data-table>
-                        </template>
+                        <table id="table1" class="table table-sm table-borderless">
+                            <thead class="table-dark">
+                                <tr>
+                                <th scope="col">Weapon Name</th>
+                                <th scope="col">Kills</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item, index) in weapons" :key="index">
+                                <td>{{ item.classname }}</td>
+                                <td>{{ item.kills }}</td>
+                                </tr>
+                            </tbody>
+                    </table>
                     </div>
                 </div>
             </div>
+
 
             <div v-if="user.weapons.length > 0" class="col-md-6">
                 <div class="card">
@@ -361,6 +364,7 @@ import BarChart from "./charts/BarChart.vue";
 
 export default {
     components: { Navbar, PieChart, DoughnutChart, BarChart },
+    
     mounted() {
         console.log('Data Fetching..')
         this.getUser();
@@ -471,6 +475,17 @@ export default {
         };
     },
     methods: {
+
+        makeTable(){
+            $(document).ready(function(){
+                $('#table1').DataTable({
+                    "pageLength": 5,
+                    "lengthMenu": [5, 10],
+                    order: [[1, 'desc']]
+                });
+            });
+        },
+
         getMap(x) {
             // Map Mirage
             const maps = this.user.maps.filter(function (item) {
@@ -556,6 +571,7 @@ export default {
                     console.log('Data Fetched')
                     this.user = response.data;
                     this.weapons = response.data.weapons;
+                    this.makeTable();
 
                     // Hits
                     for (var key in response.data.base_hits) {

@@ -9,7 +9,7 @@
 
 
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800;900&family=Open+Sans:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800;900&family=Open+Sans:wght@600;800&family=Poppins:wght@500;700;800&display=swap');
 
 .total{
     font-family: 'Montserrat', sans-serif;
@@ -22,8 +22,9 @@
     margin-top: 10px;
     background-color: white;
     border-radius: 1.0rem;
-    margin-left: 20px;
-    margin-right: 20px;
+    // margin-left: 20px;
+    // margin-right: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
@@ -76,6 +77,9 @@ body{
     color: #555555;
 }
 
+td{
+    font-family: 'Open Sans', sans-serif;
+}
 // .nav-xlink{
 //     font-family: 'Open Sans', sans-serif;
 // }

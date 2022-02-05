@@ -1,6 +1,6 @@
 <template>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg mb-3">
+    <nav class="navbar navbar-expand-lg mb-3 container">
         <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Navbar brand -->
