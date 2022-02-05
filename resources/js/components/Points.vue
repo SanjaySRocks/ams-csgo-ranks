@@ -4,38 +4,39 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Points Table</h5>
-
-                        <template>
-                            <v-text-field
-                                v-model="search"
-                                append-icon="mdi-magnify"
-                                label="Search"
-                                single-line
-                                hide-details
-                            ></v-text-field>
-                            <v-data-table
-                                dense
-                                :headers="headers"
-                                :items="desserts"
-                                :items-per-page="10"
-                                class="elevation-1"
-                                :search="search"
+                        <h5 class="card-title">{{ title }}</h5>
+                        <div class="table-responsive">
+                            <table
+                                id="example"
+                                class="table table-sm table-hover"
+                                style="width: 100%"
                             >
-                            <!-- <template v-slot:[`item.name`]="{ item }">
-                                    <router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}">{{ item.name }}</router-link>
-                            </template> -->
-                            <template v-slot:item="{ item }">
+                                <thead>
                                     <tr>
-                                    <td><router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}"> {{ item.name }} </router-link> </td> 
-                                    <td>{{item.steam }} </td>
-                                    <td>{{ item.value }} </td>
-                                </tr>
-                            </template>
+                                        <th>Player</th>
+                                        <th>Steam ID</th>
+                                        <th>Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <tr v-for="(point, index) in table" :key="index">
+                                        <td>{{ index + 1}}</td>
+                                        <td>{{ point.name }}</td>
+                                        <td>{{ point.steam }}</td>
+                                        <td>{{ point.value }}</td>
+                                    </tr> -->
 
-                            </v-data-table>
-                        </template>
-                        
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Player</th>
+                                        <th>Steam ID</th>
+                                        <th>Points</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,32 +45,46 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        search: '',
-        headers: [
-          { text: 'Name', align: 'start', value: 'name' },
-          { text: 'Steam', value: 'steam' },
-          { text: 'XP', value: 'value' },
-        ],
-        desserts: [],
-      }
-    },
-    methods:{
-        playerItem(item){
-            console.log(item);
-        },
+export default {
+    props: ["title"],
 
-            getTable(){
+    data() {
+            return {
+              table: {},
+            }
+        },
+    methods: {
+        getTest(x){
+            console.log(x);
+        },
+        getTable(){
             axios.get('/api/points')
                 .then((response)=>{
-                this.desserts = response.data
+                this.table = response.data
                 })
         }
     },
-    created(){
-        this.getTable();
+    mounted() {
+        $('#example').DataTable(
+        {
+            "processing": true,
+            "language": {
+                "processing": '<div class="spinner-border text-danger" role="status"></div> Loading...'},
+            "ordering": false,
+            "serverSide": true,
+            "ajax": "api/get/points",
+            "columns": [
+                { "data": "name", 
+                    "className": 'font-weight-bold', 
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html('<router-link class="text-primary" :to="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</router-link>');
+                    }
+
+                },
+                { "data": "steam" },
+                { "data": "value" }
+            ]
+            });
     }
-  }
+};
 </script>

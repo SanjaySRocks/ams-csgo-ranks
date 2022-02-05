@@ -42,7 +42,7 @@
                         <h5 class="card-title">Total Headshots</h5>
                         <p class="card-text total">
                             <img
-                                src="icons/global/headshot.svg"
+                                src="img/global/headshot.svg"
                                 height="32px"
                             />
                             {{ numberWithCommas(total.headshots) }}
@@ -79,7 +79,7 @@
                         <h5 class="card-title">Total Knifes</h5>
                         <p class="card-text total">
                             <img
-                                src="icons/weapons/weapon_knife.svg"
+                                src="img/weapons/weapon_knife.svg"
                                 height="32px"
                             />
                             {{ numberWithCommas(total.knifes) }}

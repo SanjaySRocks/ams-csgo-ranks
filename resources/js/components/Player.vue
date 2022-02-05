@@ -85,7 +85,7 @@
                         <p class="card-text my-0">
                             Total Played:
                             <span class="badge bg-danger">{{
-                                getPlayTime(user.playtime)
+                                getPlayTime(user)
                             }}</span>
                         </p>
 
@@ -110,7 +110,7 @@
 
             <div v-if="user.unusual.length > 0" class="col-md-6">
                 <div id="global-count" class="row mb-3 align-right">
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">WALLBANG</h5>
@@ -129,7 +129,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">NOSCOPE</h5>
@@ -147,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">RUN KILL</h5>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">JUMPING</h5>
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">FLASHED</h5>
@@ -191,7 +191,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">360 SPIN</h5>
@@ -207,7 +207,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">FIRST BLOOD</h5>
@@ -221,7 +221,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">SMOKE THROUGH</h5>
@@ -236,7 +236,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">LAST BULLET</h5>
@@ -270,7 +270,6 @@
                                 class="elevation-1"
                             >
                                 <template v-slot:[`item.classname`]="{ item }">
-                                    <!-- <img src="/icons/weapons/{{ item.classname}}.svg" height="12px" class="pr-3"> -->
                                     {{ item.classname }}
                                 </template>
                             </v-data-table>
@@ -363,10 +362,43 @@ import BarChart from "./charts/BarChart.vue";
 export default {
     components: { Navbar, PieChart, DoughnutChart, BarChart },
     mounted() {
+        console.log('Data Fetching..')
         this.getUser();
     },
     data() {
         return {
+            // WeaponNames = {
+            //     weapon_ak47: "AK-47",
+            //     weapon_awp: "AWP",
+            //     weapon_bizon: "PP-BIZON",
+            //     weapon_deagle: "Desert Eagle",
+            //     weapon_elite: "Dual Berettas",
+            //     weapon_famas: "FAMAS",
+            //     weapon_fiveseven: "Five-SeveN",
+            //     weapon_g3sg1: "G3SG1 (Terrorist Auto Sniper)",
+            //     weapon_galilar: "Galil AR",
+            //     weapon_glock: "Glock-18",
+            //     weapon_hegrenade: "He Grenade",
+            //     weapon_inferno: "Molotov",
+            //     weapon_knife: "Knife",
+            //     weapon_m249: "M249",
+            //     weapon_m4a1: "M4A4",
+            //     weapon_m4a1_silencer: "M4A1-S",
+            //     weapon_mac10: "MAC-10",
+            //     weapon_mp5sd: "MP5-SD",
+            //     weapon_mp7: "MP7",
+            //     weapon_mp9: "MP9",
+            //     weapon_nova: "Nova",
+            //     weapon_p250: "P250",
+            //     weapon_sawedoff: "Sawed-Off Shotgun",
+            //     weapon_scar20: "SCAR-20 (CT Auto Sniper)",
+            //     weapon_ssg08: "SSG 08 (Scout Sniper)",
+            //     weapon_taser: "Taser",
+            //     weapon_tec9: "Tec-9",
+            //     weapon_usp_silencer: "USP-S",
+            //     weapon_xm1014: "XM1014"
+            // },
+
             HitsData: {
                 labels: [],
                 datasets: [
@@ -387,6 +419,7 @@ export default {
                     },
                 ],
             },
+
             MapsData: {
                 labels: [],
                 datasets: [
@@ -405,18 +438,6 @@ export default {
                             "#9900EF",
                         ],
                         hoverBorderWidth: 10,
-                    },
-                ],
-            },
-
-            MapsData2: {
-                labels: [],
-                datasets: [
-                    {
-                        data: [],
-                        fill: false,
-                        borderColor: "rgb(75, 192, 192)",
-                        tension: 0.1,
                     },
                 ],
             },
@@ -496,10 +517,16 @@ export default {
             return time;
         },
 
-        getPlayTime(time) {
+        getPlayTime(user) {
+            if(!user.playtime)
+                return
+
+            console.log('Time', user.playtime)
             var date = new Date(null);
-            date.setSeconds(time); // specify value for SECONDS here
+            date.setSeconds(user.playtime); // specify value for SECONDS here
+            console.log('Date', date.setSeconds(user.playtime))
             var result = date.toISOString().substr(11, 8);
+            console.log('Result',result)
             return result;
         },
         convertKD(tk, td) {
@@ -526,6 +553,7 @@ export default {
             axios
                 .get("api/user/" + this.$route.params.id)
                 .then((response) => {
+                    console.log('Data Fetched')
                     this.user = response.data;
                     this.weapons = response.data.weapons;
 
@@ -580,21 +608,6 @@ export default {
                             );
                         }
                     }
-
-                    // //
-                    // for (var key in response.data.maps){
-                    //     let map_data = {};
-
-                    //     let temp = [];
-
-                    //     for(var n in response.data.maps[key]){
-                    //         temp.push(n);
-                    //     }
-
-                    //     map_data.push(temp);
-
-                    //     console.log(map_data);
-                    // }
                 })
                 .catch(function (error) {
                     if (error.response) {

@@ -63,8 +63,6 @@ class LevelRanksController extends Controller
 
     public function getUser($id){
         $user = LevelRanks::with(['base_hits','weapons','maps','unusual'])->where('steam', $id)->first();
-
-        return $user;
         
         // dd($points);
         if(!$user)
@@ -79,38 +77,33 @@ class LevelRanksController extends Controller
         switch($id)
         {
             // Points
-            case "1": 
+            case "points": 
                     $query = LevelRanks::select('steam','name','value')->orderBy('value', 'DESC');
                     break;
 
             //Kills
-            case "2": 
+            case "kills": 
                     $query = LevelRanks::select('id','steam','name','kills')->orderBy('kills', 'DESC');
                     break;
 
             // headshot
-            case "3": 
+            case "headshots": 
                     $query = LevelRanks::select('id','steam','name','head')->orderBy('head', 'DESC');
                     break;
 
             // knife
-            case "4": 
+            case "knifes": 
                     $query = LevelRanks::select('id','steam','name','knife')->orderBy('knife', 'DESC');
-                    break;
-
-            // mvp
-            case "5": 
-                    $query = LevelRanks::select('id','steam','name','mvp')->orderBy('mvp', 'DESC');
                     break;
 
             // default: $query = DB::table('rankme')->select('id','steam','name','score', 'deaths')->orderBy('score', 'DESC');
         }
 
         return DataTables::eloquent($query)
-            ->addColumn('name', function ($user) {
-                return '<a class="font-weight-bold text-primary" href="/player/'. $user->steam .'">'. $user->name .'</a>';
-            })
-            ->rawColumns(['name'])
+            // ->addColumn('name', function ($user) {
+            //     return '<span style="cursor: pointer;" v-on:click="getTest('.$user->steam.')" class="font-weight-bold text-primary">'. $user->name .'</span>';
+            // })
+            // ->rawColumns(['name'])
             ->toJson();
     }
 
