@@ -15,26 +15,11 @@
                                     <tr>
                                         <th>Player</th>
                                         <th>Steam ID</th>
-                                        <th>Points</th>
+                                        <th>Total Points</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- <tr v-for="(point, index) in table" :key="index">
-                                        <td>{{ index + 1}}</td>
-                                        <td>{{ point.name }}</td>
-                                        <td>{{ point.steam }}</td>
-                                        <td>{{ point.value }}</td>
-                                    </tr> -->
-
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Player</th>
-                                        <th>Steam ID</th>
-                                        <th>Points</th>
-                                    </tr>
-                                </tfoot>
+                                <tbody></tbody>
+                                
                             </table>
                         </div>
                     </div>
@@ -50,19 +35,9 @@ export default {
 
     data() {
             return {
-              table: {},
             }
         },
     methods: {
-        getTest(x){
-            console.log(x);
-        },
-        getTable(){
-            axios.get('/api/points')
-                .then((response)=>{
-                this.table = response.data
-                })
-        }
     },
     mounted() {
         $('#example').DataTable(
@@ -82,7 +57,18 @@ export default {
 
                 },
                 { "data": "steam" },
-                { "data": "value" }
+                { "data": "value",
+                className: "text-center",
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        // let html = '';
+                        // html = iRow+1 == 1 ? '<span class="mx-1 badge bg-danger">Top 1</span>' : html
+                        // html = iRow+1 == 2 ? '<span class="mx-1 badge bg-secondary">Top 2</span>' : html
+                        // html = iRow+1 == 3 ? '<span class="mx-1 badge bg-warning">Top 3</span>' : html
+
+                        // $(nTd).html(oData.value+html);
+                        
+                    }
+                }
             ]
             });
     }

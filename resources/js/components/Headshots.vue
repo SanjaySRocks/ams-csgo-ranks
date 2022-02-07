@@ -6,28 +6,20 @@
                     <div class="card-body">
                         <h5 class="card-title">Most Headshots</h5>
 
-                        <template>
-                            <v-text-field
-                                v-model="search"
-                                append-icon="mdi-magnify"
-                                label="Search"
-                                single-line
-                                hide-details
-                            ></v-text-field>
-                            <v-data-table
-                                dense
-                                :headers="headers"
-                                :items="desserts"
-                                :items-per-page="10"
-                                class="elevation-1"
-                                :search="search"
+                        <table
+                                id="example"
+                                class="table table-sm table-hover"
+                                style="width: 100%"
                             >
-                            <template v-slot:[`item.name`]="{ item }">
-                                    <router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}">{{ item.name }}</router-link>
-                            </template>
-
-                            </v-data-table>
-                        </template>
+                                <thead>
+                                    <tr>
+                                        <th>Player</th>
+                                        <th>Steam ID</th>
+                                        <th>Total Headshots</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         
                     </div>
                 </div>
@@ -40,25 +32,37 @@
   export default {
     data () {
       return {
-        search: '',
-        headers: [
-          { text: 'Name', align: 'start', value: 'name' },
-          { text: 'Steam', value: 'steam' },
-          { text: 'Headshots', value: 'headshots' },
-        ],
-        desserts: [],
       }
     },
     methods:{
-            getTable(){
-            axios.get('/api/hs')
-                .then((response)=>{
-                this.desserts = response.data
-                })
-        }
+            
     },
-    created(){
-        this.getTable();
+    mounted(){
+        $('#example').DataTable(
+        {
+            "processing": true,
+            "language": {
+                "processing": '<div class="spinner-border text-danger" role="status"></div> Loading...'},
+            "ordering": false,
+            "serverSide": true,
+            "ajax": "api/get/headshots",
+            "columns": [
+                { "data": "name", 
+                    "className": 'font-weight-bold', 
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html('<a class="text-primary" href="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</a>');
+                    }
+
+                },
+                { "data": "steam" },
+                { "data": "headshots",
+                className: "text-center",
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                       
+                    }
+                }
+            ]
+            });
     }
   }
 </script>

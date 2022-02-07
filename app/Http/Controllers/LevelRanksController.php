@@ -14,7 +14,7 @@ class LevelRanksController extends Controller
         $total['players'] = LevelRanks::count();
         $total['headshots'] = LevelRanks::sum('headshots');
         $total['kills'] = LevelRanks::sum('kills');
-        $total['knifes'] = DB::table('lvl_base_weapons')->where('classname', 'weapon_knife')->sum('kills');
+        $total['knifes'] = LevelRanksWeapons::where('classname', 'weapon_knife')->sum('kills');
 
         $total['ptop'] = LevelRanks::select('steam','name','value')->orderBy('value', 'DESC')->first();
 
@@ -27,38 +27,9 @@ class LevelRanksController extends Controller
         $topknife_name = LevelRanks::select('name')->where('steam', $total['knifetop']->steam)->first();
         $total['knifetop']->name = $topknife_name->name;
 
+        $total['globals'] = LevelRanks::where('rank', 18)->get();
 
         return response()->json($total);
-    }
-
-    public function points(){
-        $result = LevelRanks::select('steam','name','value')->orderBy('value', 'DESC')->get();
-
-        return response()->json($result);
-    }
-
-    public function deaths(){
-        $result = LevelRanks::select('steam','name','deaths')->orderBy('deaths', 'DESC')->get();
-
-        return response()->json($result);
-    }
-
-    public function hs(){
-        $result = LevelRanks::select('steam','name','headshots')->orderBy('headshots', 'DESC')->get();
-
-        return response()->json($result);
-    }
-
-    public function kills(){
-        $result = LevelRanks::select('steam','name','kills')->orderBy('kills', 'DESC')->get();
-
-        return response()->json($result);
-    }
-
-    public function knifes(){
-        $result = LevelRanks::select('steam','name','knifes')->orderBy('knifes', 'DESC')->get();
-
-        return response()->json($result);
     }
 
     public function getUser($id){
@@ -83,17 +54,22 @@ class LevelRanksController extends Controller
 
             //Kills
             case "kills": 
-                    $query = LevelRanks::select('id','steam','name','kills')->orderBy('kills', 'DESC');
+                    $query = LevelRanks::select('steam','name','kills')->orderBy('kills', 'DESC');
+                    break;
+            
+            //Deaths
+            case "deaths": 
+                    $query = LevelRanks::select('steam','name','deaths')->orderBy('deaths', 'DESC');
                     break;
 
             // headshot
             case "headshots": 
-                    $query = LevelRanks::select('id','steam','name','head')->orderBy('head', 'DESC');
+                    $query = LevelRanks::select('steam','name','headshots')->orderBy('headshots', 'DESC');
                     break;
 
             // knife
             case "knifes": 
-                    $query = LevelRanks::select('id','steam','name','knife')->orderBy('knife', 'DESC');
+                    $query = LevelRanksWeapons::where('classname', 'weapon_knife')->orderBy('kills', 'DESC')->with('user');
                     break;
 
             // default: $query = DB::table('rankme')->select('id','steam','name','score', 'deaths')->orderBy('score', 'DESC');
@@ -106,6 +82,5 @@ class LevelRanksController extends Controller
             // ->rawColumns(['name'])
             ->toJson();
     }
-
 
 }

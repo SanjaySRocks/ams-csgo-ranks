@@ -20,11 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('total', [LevelRanksController::class, 'total']);
-Route::get('points', [LevelRanksController::class, 'points']);
-Route::get('deaths', [LevelRanksController::class, 'deaths']);
-Route::get('hs', [LevelRanksController::class, 'hs']);
-Route::get('kills', [LevelRanksController::class, 'kills']);
-Route::get('knifes', [LevelRanksController::class, 'knifes']);
-
 Route::get('get/{id}', [LevelRanksController::class, 'getPoints']);
 Route::get('user/{id}', [LevelRanksController::class, 'getUser']);

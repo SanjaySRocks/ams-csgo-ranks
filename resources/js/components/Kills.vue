@@ -6,28 +6,20 @@
                     <div class="card-body">
                         <h5 class="card-title">Most Kills</h5>
 
-                        <template>
-                            <v-text-field
-                                v-model="search"
-                                append-icon="mdi-magnify"
-                                label="Search"
-                                single-line
-                                hide-details
-                            ></v-text-field>
-                            <v-data-table
-                                dense
-                                :headers="headers"
-                                :items="desserts"
-                                :items-per-page="10"
-                                class="elevation-1"
-                                :search="search"
+                        <table
+                                id="example"
+                                class="table table-sm table-hover"
+                                style="width: 100%"
                             >
-                            <template v-slot:[`item.name`]="{ item }">
-                                    <router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}">{{ item.name }}</router-link>
-                            </template>
-
-                            </v-data-table>
-                        </template>
+                                <thead>
+                                    <tr>
+                                        <th>Player</th>
+                                        <th>Steam ID</th>
+                                        <th>Total Kills</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         
                     </div>
                 </div>
@@ -40,25 +32,41 @@
   export default {
     data () {
       return {
-        search: '',
-        headers: [
-          { text: 'Name', align: 'start', value: 'name' },
-          { text: 'Steam', value: 'steam' },
-          { text: 'Kills', value: 'kills' },
-        ],
-        desserts: [],
       }
     },
     methods:{
-            getTable(){
-            axios.get('/api/kills')
-                .then((response)=>{
-                this.desserts = response.data
-                })
-        }
     },
-    created(){
-        this.getTable();
+    mounted(){
+        $('#example').DataTable(
+        {
+            "processing": true,
+            "language": {
+                "processing": '<div class="spinner-border text-danger" role="status"></div> Loading...'},
+            "ordering": false,
+            "serverSide": true,
+            "ajax": "api/get/kills",
+            "columns": [
+                { "data": "name", 
+                    "className": 'font-weight-bold', 
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html('<a class="text-primary" href="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</a>');
+                    }
+
+                },
+                { "data": "steam" },
+                { "data": "kills",
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        // let html = '';
+                        // html = iRow+1 == 1 ? '<span class="mx-1 badge bg-danger">Top 1</span>' : html
+                        // html = iRow+1 == 2 ? '<span class="mx-1 badge bg-secondary">Top 2</span>' : html
+                        // html = iRow+1 == 3 ? '<span class="mx-1 badge bg-warning">Top 3</span>' : html
+
+                        // $(nTd).html(oData.value+html);
+                        
+                    }
+                }
+            ]
+            });
     }
   }
 </script>

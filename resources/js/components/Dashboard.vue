@@ -26,13 +26,9 @@
                             {{ numberWithCommas(total.players) }}
                         </p>
 
-                        <p class="card-text top">
-                            {{ total.ptop.name }} ({{ total.ptop.value }} Points )
+                        <p class="card-text top" @click="moveToUser(total.ptop.steam)">
+                            Leader: {{ total.ptop.name }}
                         </p>
-
-                        <button class="btn btn-primary">
-                            View
-                        </button>
                     </div>
                 </div>
             </div>
@@ -47,12 +43,10 @@
                             />
                             {{ numberWithCommas(total.headshots) }}
                         </p>
-                        <p class="card-text top">
-                            {{ total.htop.name }} ({{ total.htop.headshots }})
+                        <p class="card-text top" @click="moveToUser(total.htop.steam)">
+                            Leader: {{ total.htop.name }}
                         </p>
-                        <button class="btn btn-primary">
-                            View
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -64,12 +58,10 @@
                             <i class="fas fa-skull-crossbones"></i>
                             {{ numberWithCommas(total.kills) }}
                         </p>
-                        <p class="card-text top">
-                            {{ total.ktop.name }} ({{ total.ktop.kills }})
+                        <p class="card-text top" @click="moveToUser(total.ktop.steam)">
+                            Leader: {{ total.ktop.name }}
                         </p>
-                        <button class="btn btn-primary">
-                            View
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -84,15 +76,36 @@
                             />
                             {{ numberWithCommas(total.knifes) }}
                         </p>
-                        <p class="card-text top">
-                            {{total.knifetop.name}} ({{total.knifetop.kills}})
+                        <p class="card-text top" @click="moveToUser(total.knifetop.steam)">
+                            Leader: {{total.knifetop.name}}
                         </p>
-                        <button class="btn btn-primary">
-                            View
-                        </button>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="text-center">
+                        <p class="card-title"><h3>Top Global Achievers</h3></p>
+                        <img height="64px" src="https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/0e457516ba13817a45b6c2a1d262fe7d0599bcbc/csgo/pak01_dir/resource/flash/econ/status_icons/skillgroup18.png" alt="global rank">
+                    </div>
+                    <table class="table table-sm">
+                    <thead>
+                        <tr>
+                        <th scope="col">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(x, index) in total.globals" :key="index">
+                        <td class="text-primary" @click="moveToUser(x.steam)">{{x.name}}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -108,6 +121,10 @@ export default {
         };
     },
     methods: {
+        moveToUser(x){
+            this.$router.push({name: 'player', params: { id: x }})
+        },
+
         numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },

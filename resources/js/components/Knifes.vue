@@ -6,28 +6,27 @@
                     <div class="card-body">
                         <h5 class="card-title">Most Knifes</h5>
 
-                        <template>
-                            <v-text-field
-                                v-model="search"
-                                append-icon="mdi-magnify"
-                                label="Search"
-                                single-line
-                                hide-details
-                            ></v-text-field>
-                            <v-data-table
-                                dense
-                                :headers="headers"
-                                :items="desserts"
-                                :items-per-page="10"
-                                class="elevation-1"
-                                :search="search"
+                        <table
+                                id="example"
+                                class="table table-sm table-hover"
+                                style="width: 100%"
                             >
-                            <template v-slot:[`item.name`]="{ item }">
-                                    <router-link class="font-weight-bolder" :to="{name: 'player', params:{id: item.steam }}">{{ item.name }}</router-link>
-                            </template>
-
-                            </v-data-table>
-                        </template>
+                                <thead>
+                                    <tr>
+                                        <th>Player</th>
+                                        <th>Steam ID</th>
+                                        <th>Knifes</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Player</th>
+                                        <th>Steam ID</th>
+                                        <th>Knifes</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         
                     </div>
                 </div>
@@ -40,25 +39,31 @@
   export default {
     data () {
       return {
-        search: '',
-        headers: [
-          { text: 'Name', align: 'start', value: 'name' },
-          { text: 'Steam', value: 'steam' },
-          { text: 'Knifes', value: 'knifes' },
-        ],
-        desserts: [],
       }
     },
     methods:{
-            getTable(){
-            axios.get('/api/knifes')
-                .then((response)=>{
-                this.desserts = response.data
-                })
-        }
     },
-    created(){
-        this.getTable();
+    mounted(){
+        $('#example').DataTable(
+        {
+            "processing": true,
+            "language": {
+                "processing": '<div class="spinner-border text-danger" role="status"></div> Loading...'},
+            "ordering": false,
+            "serverSide": true,
+            "ajax": "api/get/knifes",
+            "columns": [
+                { "data": "user.name", 
+                    "className": 'font-weight-bold', 
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html('<a class="text-primary" href="player/'+oData.steam+'" style="cursor: pointer;">'+oData.user.name+'</a>');
+                    }
+
+                },
+                { "data": "steam" },
+                { "data": "kills" }
+            ]
+            });
     }
   }
 </script>

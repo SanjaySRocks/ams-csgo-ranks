@@ -326,14 +326,6 @@
                                 </div>
                             </ul>
                         </div>
-                        <!-- <div v-for="x in map_badge" :key="x">
-                            <span
-                                @click="getMap(x)"
-                                class="badge badge-secondary"
-                                style="cursor: pointer"
-                                >{{ x }}
-                            </span>
-                        </div> -->
                         <pie-chart :chartData="MapsData"></pie-chart>
                     </div>
                 </div>
@@ -536,12 +528,11 @@ export default {
             if(!user.playtime)
                 return
 
-            console.log('Time', user.playtime)
-            var date = new Date(null);
-            date.setSeconds(user.playtime); // specify value for SECONDS here
-            console.log('Date', date.setSeconds(user.playtime))
-            var result = date.toISOString().substr(11, 8);
-            console.log('Result',result)
+            const seconds = user.playtime;
+            const hours = parseInt(seconds/3600);
+            const minutes = parseInt((seconds%3600)/60);
+            const sec = seconds%60;
+            const result = hours+':'+minutes+':'+sec+' Hours';
             return result;
         },
         convertKD(tk, td) {
