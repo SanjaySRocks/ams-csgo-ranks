@@ -520,8 +520,8 @@ export default {
 
         getTime(user) {
             let x = parseInt(user.lastconnect);
-            let time = Date(x * 1000);
-            return time;
+            const myDate = new Date(x *1000);
+            return myDate;
         },
 
         getPlayTime(user) {

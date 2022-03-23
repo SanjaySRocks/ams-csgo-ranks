@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('total', [LevelRanksController::class, 'total']);
 Route::get('get/{id}', [LevelRanksController::class, 'getPoints']);
 Route::get('user/{id}', [LevelRanksController::class, 'getUser']);
+Route::get('top10', [LevelRanksController::class, 'getTop10']);

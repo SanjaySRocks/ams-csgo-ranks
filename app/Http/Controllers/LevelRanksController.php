@@ -10,6 +10,12 @@ use DataTables;
 
 class LevelRanksController extends Controller
 {
+    public function getTop10(){
+        $top10 = LevelRanks::orderBy('value', 'DESC')->take(10)->get();
+
+        return response()->json($top10);
+    }
+
     public function total(){
         $total['players'] = LevelRanks::count();
         $total['headshots'] = LevelRanks::sum('headshots');
