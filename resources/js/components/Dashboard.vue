@@ -86,7 +86,7 @@
 
             <div class="col-md-12">
                 <div class="card">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <h3>Top 10</h3>
                     <table class="table table-sm">
                     <thead>
@@ -117,7 +117,7 @@
             
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                     <div class="text-center pb-3">
                         <h3>Top Global Achievers</h3>
                         <img height="64px" src="https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/0e457516ba13817a45b6c2a1d262fe7d0599bcbc/csgo/pak01_dir/resource/flash/econ/status_icons/skillgroup18.png" alt="global rank">
