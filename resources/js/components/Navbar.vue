@@ -1,8 +1,8 @@
 <template>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg mb-3 container">
+    <nav class="navbar navbar-expand-lg mb-3 container-fluid">
         <!-- Container wrapper -->
-        <div class="container-fluid">
+        <div class="container">
             <!-- Navbar brand -->
             <router-link class="navbar-brand me-2" :to="{name: 'home'}">
                 <img
