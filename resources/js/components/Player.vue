@@ -528,7 +528,7 @@ export default {
             if(!user.playtime)
                 return
 
-            result = Math.round(user.playtime/60/60) + " hrs"
+            const result = Math.round(user.playtime/60/60) + " hrs"
             return result;
         },
         convertKD(tk, td) {
