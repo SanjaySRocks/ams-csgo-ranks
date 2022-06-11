@@ -21,10 +21,10 @@
 
                         <p class="card-text my-0">
                             Steam:
-                            <span class="badge bg-primary">{{
+                            <span class="badge badge-info">{{
                                 user.steam
-                            }}</span>
-                            <span class="badge bg-primary">{{
+                            }}</span> / 
+                            <span class="badge badge-info">{{
                                 convert_steam64(user.steam)
                             }}</span>
                         </p>
@@ -258,7 +258,7 @@
             </div>
 
 
-            <div v-if="user.weapons.length > 0" class="col-md-6">
+            <div v-if="user.weapons.length > 0" class="col-md-12 my-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Weapon Statistics</h5>
@@ -281,15 +281,15 @@
             </div>
 
 
-            <div v-if="user.weapons.length > 0" class="col-md-6">
+            <!-- <div v-if="user.weapons.length > 0" class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Loading...</h5>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div v-if="HitsData.datasets[0].data.length > 0" class="col-md-4">
+            <div v-if="HitsData.datasets[0].data.length > 0" class="col-md-4 my-3">
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">Hits Charts</p>
@@ -333,7 +333,7 @@
 
             <div
                 v-if="MapCompareData.datasets[0].data.length > 0"
-                class="col-md-4"
+                class="col-md-4 my-3"
             >
                 <div class="card">
                     <div class="card-body">
