@@ -528,11 +528,7 @@ export default {
             if(!user.playtime)
                 return
 
-            const seconds = user.playtime;
-            const hours = parseInt(seconds/3600);
-            const minutes = parseInt((seconds%3600)/60);
-            const sec = seconds%60;
-            const result = hours+':'+minutes+':'+sec+' Hours';
+            result = Math.round(user.playtime/60/60) + " hrs"
             return result;
         },
         convertKD(tk, td) {

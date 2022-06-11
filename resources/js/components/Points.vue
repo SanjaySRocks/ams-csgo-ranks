@@ -52,7 +52,7 @@ export default {
                 { "data": "name", 
                     "className": 'font-weight-bold', 
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html('<a class="text-primary" href="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</a>');
+                        $(nTd).html('<a class="text-secondary" href="player/'+oData.steam+'" style="cursor: pointer;">'+oData.name+'</a>');
                     }
 
                 },

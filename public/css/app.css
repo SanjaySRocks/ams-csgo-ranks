@@ -6,10 +6,10 @@
 }
 
 .navbar {
-  margin-top: 10px;
   background-color: white;
-  border-radius: 1rem;
   font-family: "Poppins", sans-serif;
+  padding-top: 0%;
+  padding-bottom: 0%;
 }
 
 body {
@@ -63,6 +63,5 @@ td {
 }
 
 .top {
-  color: #9627aa;
   cursor: pointer;
 }

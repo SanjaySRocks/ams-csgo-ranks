@@ -27,7 +27,7 @@
                         </p>
 
                         <p class="card-text top" @click="moveToUser(total.ptop.steam)">
-                            Leader: {{ total.ptop.name }}
+                            Leader: <span class="text-danger">{{ total.ptop.name }}</span>
                         </p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             {{ numberWithCommas(total.headshots) }}
                         </p>
                         <p class="card-text top" @click="moveToUser(total.htop.steam)">
-                            Leader: {{ total.htop.name }}
+                            Leader: <span class="text-danger">{{ total.htop.name }}</span>
                         </p>
 
                     </div>
@@ -60,7 +60,7 @@
                             {{ numberWithCommas(total.kills) }}
                         </p>
                         <p class="card-text top" @click="moveToUser(total.ktop.steam)">
-                            Leader: {{ total.ktop.name }}
+                            Leader: <span class="text-danger">{{ total.ktop.name }}</span>
                         </p>
 
                     </div>
@@ -78,7 +78,7 @@
                             {{ numberWithCommas(total.knifes) }}
                         </p>
                         <p class="card-text top" @click="moveToUser(total.knifetop.steam)">
-                            Leader: {{total.knifetop.name}}
+                            Leader: <span class="text-danger">{{total.knifetop.name}}</span>
                         </p>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                 <div class="card">
                 <div class="card-body table-responsive">
                     <h3>Top 10</h3>
-                    <table class="table table-sm">
+                    <table class="table table-hover table-sm">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
@@ -108,21 +108,21 @@
                         <td><img id="skillgroup" :src="getSkillImage(x)" /></td>
                         <td>{{x.kills}}</td>
                         <td>{{x.deaths}}</td>
-                        <td>{{ Math.round((x.playtime/60/60) * 10) / 10  }} Hrs.</td>
+                        <td>{{ Math.round(x.playtime/60/60)  }} hrs</td>
                         </tr>
                     </tbody>
                     </table>
                     </div></div>
             </div>
             
-            <div class="col-md-12">
+            <div class="col-md-12 my-5">
                 <div class="card">
                     <div class="card-body table-responsive">
                     <div class="text-center pb-3">
                         <h3>Top Global Achievers</h3>
                         <img height="64px" src="https://raw.githubusercontent.com/SteamDatabase/GameTracking-CSGO/0e457516ba13817a45b6c2a1d262fe7d0599bcbc/csgo/pak01_dir/resource/flash/econ/status_icons/skillgroup18.png" alt="global rank">
                     </div>
-                    <table class="table table-sm">
+                    <table class="table table-hover table-sm">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
@@ -142,7 +142,7 @@
                         <td>{{ x.kills }}</td>
                         <td>{{ x.deaths }}</td>
                         <td>{{ x.headshots }}</td>
-                        <td>{{ Math.round((x.playtime/60/60) * 10) / 10  }} Hrs.</td>
+                        <td>{{ Math.round(x.playtime/60/60)  }} hrs</td>
                         </tr>
                     </tbody>
                     </table>

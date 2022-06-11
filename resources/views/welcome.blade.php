@@ -7,9 +7,10 @@
 
         <title>{{ env('APP_NAME', 'Laravel') }}</title>
 
+        {{-- MDB --}}
         <!-- Font Awesome -->
         <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         rel="stylesheet"
         />
         <!-- Google Fonts -->
@@ -19,9 +20,11 @@
         />
         <!-- MDB -->
         <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css"
         rel="stylesheet"
         />
+
+        {{--  --}}
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
 
@@ -35,11 +38,13 @@
         <div id="app">
             <app/>
         </div>
+
         <!-- MDB -->
         <script
         type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"
         ></script>
+
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
