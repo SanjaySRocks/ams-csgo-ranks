@@ -1,5 +1,7 @@
-# ams-csgo-ranks
- A minimal web panel to show all level ranks statistics
+# level ranks web vue front-end
+A minimal web panel to show all level ranks statistics
+
+Status: Under Active Development
 
 Sites:-
 
