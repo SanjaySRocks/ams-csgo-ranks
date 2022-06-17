@@ -1,7 +1,7 @@
 # level ranks web vue front-end
 A minimal web panel to show all level ranks statistics
 
-Status: Under Active Development
+**Status: Under Active Development**
 
 Sites:-
 
